@@ -5,6 +5,7 @@ struct Pessoa {
     char nome[100];
     int idade;
     char sexo;
+    int imunizado;
 };
 
 int main(void) {
@@ -30,12 +31,16 @@ int main(void) {
   scanf("%d", &doses);
 
 int menu=0;
-
+int interessados=1;
 
 while(menu!=5){
   
   printf("\n\nMENU\n1 - Cadastrar interessado\n2 - Confirmar imunização\n3 - Exibir fila em triagem\n4 - Relatórios\n5 - Encerrar\n\n");
   scanf("%d", &menu);
+
+int continuar=1;
+int fila=1;
+
 
   switch (menu) {
 
@@ -43,32 +48,68 @@ while(menu!=5){
     
     struct Pessoa pessoas[5];
 
-    for (int i = 0; i < total_triagem; i++) {
+    for (int i=interessados; i < total_triagem; i++, interessados++) {
 
-      int continuar=1;
+        printf("\nInforme o nome da pessoa:\n\n");
+        scanf("%s", &pessoas[i].nome);
 
-        printf("Informe o nome da pessoa: ", i+1);
-        scanf("%s", pessoas[i].nome);
-
-        printf("Informe a idade da pessoa: ", i+1);
+        printf("Informe a idade da pessoa:\n\n");
         scanf("%d", &pessoas[i].idade);
 
-        printf("Informe o sexo da pessoa (M/F): ", i+1);
+        printf("Informe o sexo da pessoa (M/F):\n");
         scanf(" %c", &pessoas[i].sexo);
 
-        printf("Quer cadastrar outro interessado? (1-S/2-N)");
-        scanf(" %d", &continuar);
+        printf("Gostaria de cadastrar outro interessado? (1-S/2-N):\n");
+        scanf("%d", &continuar);
+        pessoas[i].imunizado=0;
+
+        int interessados=i;
 
         if(continuar==2){
           break;
         }
-        
     }
     
       break;
     
     
     case 2:
+
+    int j=1;
+    if(doses>0){
+
+        for (int i=fila; i < total_triagem; i++,fila++){
+
+          if(pessoas[i].imunizado==0){
+            printf("Gostaria de continuar a fila de imunização?(1-S/2-N)");
+            scanf("%d", &continuar);
+
+            if(continuar==2){
+
+              break;
+
+            }
+            
+          }
+          else{
+
+            printf("Essa pessoa já foi imunizada!");
+            printf("Gostaria de continuar a fila de imunização?(1-S/2-N)");
+            scanf("%d", &continuar);
+
+            if(continuar==2){
+
+              break;
+
+            }
+          }
+        }
+      }
+      else{
+
+      printf("Não há doses disponíveis!");
+
+    }
       break;
     
     case 3:
