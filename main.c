@@ -50,16 +50,16 @@ int fila=1;
 
     for (int i=interessados; i < total_triagem; i++, interessados++) {
 
-        printf("\nInforme o nome da pessoa:\n\n");
+        printf("\nInforme o nome da pessoa:\n");
         scanf("%s", &pessoas[i].nome);
 
-        printf("Informe a idade da pessoa:\n\n");
+        printf("\nInforme a idade da pessoa:\n");
         scanf("%d", &pessoas[i].idade);
 
-        printf("Informe o sexo da pessoa (M/F):\n");
-        scanf(" %c", &pessoas[i].sexo);
+        printf("\nInforme o sexo da pessoa (M/F):\n");
+        scanf("%s", &pessoas[i].sexo);
 
-        printf("Gostaria de cadastrar outro interessado? (1-S/2-N):\n");
+        printf("\nGostaria de cadastrar outro interessado? (1-S/2-N):\n");
         scanf("%d", &continuar);
         pessoas[i].imunizado=0;
 
@@ -81,7 +81,8 @@ int fila=1;
         for (int i=fila; i < total_triagem; i++,fila++){
 
           if(pessoas[i].imunizado==0){
-            printf("Gostaria de continuar a fila de imunização?(1-S/2-N)");
+            printf("\nSeguindo a fila, %s foi imunizado(a)!\n", pessoas[i].nome);
+            printf("\nGostaria de continuar a fila de imunização?(1-S/2-N)\n");
             scanf("%d", &continuar);
 
             if(continuar==2){
@@ -93,8 +94,8 @@ int fila=1;
           }
           else{
 
-            printf("Essa pessoa já foi imunizada!");
-            printf("Gostaria de continuar a fila de imunização?(1-S/2-N)");
+            printf("Essa pessoa já foi imunizada!\n");
+            printf("Gostaria de continuar a fila de imunização?(1-S/2-N)\n");
             scanf("%d", &continuar);
 
             if(continuar==2){
@@ -107,7 +108,7 @@ int fila=1;
       }
       else{
 
-      printf("Não há doses disponíveis!");
+      printf("Não há doses disponíveis!\n");
 
     }
       break;
